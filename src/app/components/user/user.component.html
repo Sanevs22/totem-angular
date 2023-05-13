@@ -1,0 +1,23 @@
+<div class="main">
+  <div class="user_header">
+    <div class="totem">
+      <img [src]="user.totem" alt="totem" />
+    </div>
+    <div class="shadow"></div>
+    <div class="cover"></div>
+    <div class="avatar">
+      <img [src]="user.avatar" alt="avatar" />
+    </div>
+    <div class="name">{{ user.name }}</div>
+    <div class="about">{{ user.about }}</div>
+  </div>
+  <p class="details">
+    {{ user.details }}
+  </p>
+  <div class="widgets">
+    <app-widget
+      *ngFor="let widget of user.widgets"
+      [widget]="widget"
+    ></app-widget>
+  </div>
+</div>
