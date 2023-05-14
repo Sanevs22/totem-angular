@@ -1,23 +1,46 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getFirestore } from '@angular/fire/firestore';
-import { getDatabase, set, ref } from 'firebase/database';
+import { Firestore, collection } from '@angular/fire/firestore';
+import {
+  addDoc,
+  getDocs,
+  getDoc,
+  getFirestore,
+  doc,
+  query,
+  where,
+} from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: AngularFireAuth) {}
+  constructor(private auth: AngularFireAuth, private firestore: Firestore) {}
 
-  async signUp(email: string, password: string) {
-    try {
-      let user = await this.auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log(user);
-    } catch (err) {
-      console.log(err);
+  async signUp(email: string, password: string, nickname: string) {
+    const db = getFirestore();
+    const queryEmail = query(
+      collection(db, 'user'),
+      where('email', '==', email)
+    );
+    const emailSnapshot = await getDocs(queryEmail);
+    if (emailSnapshot.docs.length === 0) {
+      try {
+        let user = await this.auth.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+        await addDoc(collection(db, 'user'), {
+          email: email,
+          nickname: nickname,
+        });
+        console.log(user.user?.uid);
+        return { code: 3, message: 'регистрация прошла успешно' };
+      } catch (err) {
+        return { code: 2, message: err };
+      }
+    } else {
+      return { code: 1, message: 'email занят' };
     }
   }
 }

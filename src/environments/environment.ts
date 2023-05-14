@@ -8,5 +8,7 @@ export const environment = {
     apiKey: 'AIzaSyDJpYpiRtDT7XK_h-EzA7UWZgN05ogcATQ',
     authDomain: 'tango-1232100.firebaseapp.com',
     messagingSenderId: '354507376670',
+    databaseURL:
+      'https://tango-1232100-default-rtdb.europe-west1.firebasedatabase.app',
   },
 };

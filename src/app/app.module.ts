@@ -26,6 +26,9 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { ErrComponent } from './components/pages/err/err.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     HeaderComponent,
     StartPageComponent,
     SignUpComponent,
+    ErrComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,9 +55,10 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     TuiErrorModule,
     TuiFieldErrorPipeModule,
     AngularFireModule.initializeApp(environment.firebase),
-
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage()),
   ],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   bootstrap: [AppComponent],

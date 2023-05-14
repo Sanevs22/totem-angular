@@ -25,9 +25,14 @@ export class SignUpComponent {
     ]),
   });
 
-  signUp() {
+  async signUp() {
     this.loader = true;
-    this.authService.signUp('new22312u3ser@dsd.com', 'pass22222');
+    let status = await this.authService.signUp(
+      'test2@ds.com',
+      'pass22222',
+      'Samx'
+    );
+    console.log(status.message);
     console.log(this.form.value);
   }
 }
