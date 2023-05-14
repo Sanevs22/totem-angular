@@ -105,6 +105,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "coursework-Sanevs22:build:production",
+            "firebaseProject": "tango-1232100",
+            "firebaseHostingSite": "tango-1232100"
+          }
         }
       }
     }

@@ -1,3 +1,73 @@
 <div class="main">
-  <p>sign-up works!</p>
+  <div class="form">
+    <div class="tui-text_h6">Пройдите регистрацию</div>
+    <form [formGroup]="form">
+      <p>
+        <tui-input formControlName="email">
+          Ваш email
+          <input tuiTextfield />
+        </tui-input>
+        <tui-error
+          *ngIf="
+            this.form.controls.email.invalid && this.form.controls.email.touched
+          "
+          error="Введите корректный email"
+        ></tui-error>
+      </p>
+      <p>
+        <tui-input formControlName="password">
+          Придумай пароль
+          <input tuiTextfield />
+        </tui-input>
+        <tui-error
+          *ngIf="
+            this.form.controls.password.invalid &&
+            this.form.controls.password.touched
+          "
+          error="Введите корректный пароль 8 символов"
+        ></tui-error>
+      </p>
+      <p>
+        <tui-input formControlName="passwordRepeat">
+          Повтори пароль
+          <input tuiTextfield />
+        </tui-input>
+        <tui-error
+          *ngIf="
+            this.form.controls.passwordRepeat.value !==
+              this.form.controls.password.value &&
+            this.form.controls.passwordRepeat.touched
+          "
+          error="Пароли должны совпадать"
+        ></tui-error>
+      </p>
+      <p>
+        <tui-input formControlName="nickname">
+          Придумай nickname (/user/...)
+          <input tuiTextfield />
+        </tui-input>
+        <tui-error
+          *ngIf="
+            this.form.controls.nickname.invalid &&
+            this.form.controls.nickname.touched
+          "
+          error="Этот nickname занят"
+        ></tui-error>
+      </p>
+      <button
+        type="button"
+        tuiButton
+        appearance="accent"
+        [showLoader]="loader"
+        [disabled]="form.invalid"
+        (click)="signUp()"
+      >
+        Отправить
+      </button>
+    </form>
+  </div>
+
+  <button type="button" tuiButton appearance="accent" (click)="signUp()">
+    тест
+  </button>
 </div>
