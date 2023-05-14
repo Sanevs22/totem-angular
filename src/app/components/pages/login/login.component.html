@@ -1,0 +1,42 @@
+<div class="main">
+  <div class="form">
+    <div class="tui-text_h6">Войти</div>
+    <form [formGroup]="form">
+      <p>
+        <tui-input formControlName="email">
+          Ваш email
+          <input tuiTextfield />
+        </tui-input>
+        <tui-error
+          *ngIf="
+            this.form.controls.email.invalid && this.form.controls.email.touched
+          "
+          error="Введите корректный email"
+        ></tui-error>
+      </p>
+      <p>
+        <tui-input formControlName="password">
+          Придумай пароль
+          <input tuiTextfield />
+        </tui-input>
+        <tui-error
+          *ngIf="
+            this.form.controls.password.invalid &&
+            this.form.controls.password.touched
+          "
+          error="Введите корректный пароль 8 символов"
+        ></tui-error>
+      </p>
+      <button
+        type="button"
+        tuiButton
+        appearance="accent"
+        [showLoader]="loader"
+        [disabled]="form.invalid"
+        (click)="login()"
+      >
+        Войти
+      </button>
+    </form>
+  </div>
+</div>

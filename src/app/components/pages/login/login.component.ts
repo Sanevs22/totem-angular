@@ -4,11 +4,11 @@ import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.less'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.less'],
 })
-export class SignUpComponent {
+export class LoginComponent {
   constructor(
     private authService: AuthService,
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService
@@ -20,26 +20,14 @@ export class SignUpComponent {
       Validators.required,
       Validators.minLength(8),
     ]),
-    passwordRepeat: new FormControl(null, [Validators.required]),
-    nickname: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.pattern('^[a-z]+$'),
-    ]),
   });
 
-  async signUp() {
+  async login() {
     this.loader = true;
-    let status = await this.authService.signUp(
-      this.form.controls.email.value!,
-      this.form.controls.password.value!,
-      this.form.controls.nickname.value!
-    );
     this.loader = false;
-    this.alerts.open(status.message!).subscribe({
+    this.alerts.open('молодец').subscribe({
       complete: () => {},
     });
-    console.log(status.message);
     console.log(this.form.value);
   }
 }

@@ -29,6 +29,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { ErrComponent } from './components/pages/err/err.component';
+import { LoginComponent } from './components/pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ErrComponent } from './components/pages/err/err.component';
     StartPageComponent,
     SignUpComponent,
     ErrComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

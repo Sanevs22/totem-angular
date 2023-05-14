@@ -15,4 +15,8 @@ export class StartPageComponent {
   goSignUp() {
     this.router.navigate(['sign']);
   }
+
+  goLogin() {
+    this.router.navigate(['login']);
+  }
 }

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UserAPIService {
   constructor() {}
   user = {
+    nickname: 'mike',
     name: 'Mike Fox',
     about: 'Power engineer in a cool company',
     avatar: 'assets/img/avatar.png',

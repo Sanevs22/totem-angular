@@ -24,6 +24,7 @@ export class AuthService {
       where('email', '==', email)
     );
     const emailSnapshot = await getDocs(queryEmail);
+    emailSnapshot.docs.forEach((i) => console.log(i));
     if (emailSnapshot.docs.length === 0) {
       try {
         let user = await this.auth.createUserWithEmailAndPassword(
@@ -31,10 +32,11 @@ export class AuthService {
           password
         );
         await addDoc(collection(db, 'user'), {
+          id: user.user?.uid,
           email: email,
           nickname: nickname,
         });
-        console.log(user.user?.uid);
+        console.log(user.user);
         return { code: 3, message: 'регистрация прошла успешно' };
       } catch (err) {
         return { code: 2, message: err };
