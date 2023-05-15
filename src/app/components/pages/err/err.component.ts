@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { authState } from '@angular/fire/auth';
 import { Firestore, collection } from '@angular/fire/firestore';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import {
@@ -11,6 +12,7 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
+import { Subscriber, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-err',
@@ -20,18 +22,29 @@ import {
     <button (click)="upd()">update</button>
     <button (click)="out()">out</button>
     <button (click)="status()">status</button>
+    <div>{{ (statusAuth | async) ? 'log' : 'out' }}</div>
   `,
 })
-export class ErrComponent {
+export class ErrComponent implements OnInit, OnDestroy {
   constructor(private firestore: Firestore) {}
+  subscription$!: Subscription;
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.subscription$ = this.statusAuth.subscribe((data) =>
+      console.log(22, data)
+    );
+  }
   db = getFirestore();
   auth = getAuth();
+  statusAuth = authState(this.auth);
 
   log() {
-    signInWithEmailAndPassword(this.auth, 'test7@ds.com', 'pass222323').then(
+    signInWithEmailAndPassword(this.auth, 'test2@mail.com', '12345678').then(
       (userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        console.log(user.uid);
       }
     );
   }
@@ -54,9 +67,11 @@ export class ErrComponent {
     await this.auth.signOut();
   }
 
-  status() {
-    this.auth.onAuthStateChanged((user) => {
-      console.log(user);
+  async status() {
+    let xss;
+    await this.auth.onAuthStateChanged((user) => {
+      xss = user;
     });
+    console.log(xss);
   }
 }

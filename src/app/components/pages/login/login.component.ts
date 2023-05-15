@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
@@ -9,12 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
 })
-export class LoginComponent {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
-  ) {}
+export class LoginComponent implements OnInit {
   loader = false;
   form = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -24,8 +19,23 @@ export class LoginComponent {
     ]),
   });
 
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
+  ) {}
+  async ngOnInit() {
+    await this.authService.userStatus();
+    await this.authService.userStatusSuper();
+    await this.authService.status();
+  }
+
   async login() {
     this.loader = true;
+    await this.authService.login(
+      this.form.controls.email.value!,
+      this.form.controls.password.value!
+    );
     this.loader = false;
     this.alerts.open('молодец').subscribe({
       complete: () => {},
