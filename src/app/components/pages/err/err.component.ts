@@ -68,13 +68,6 @@ export class ErrComponent {
 
   async out() {
     await this.auth.signOut();
-    // signOut(this.auth)
-    //   .then((i) => {
-    //     console.log(i);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }
 
   status() {

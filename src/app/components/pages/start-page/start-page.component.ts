@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class StartPageComponent {
   constructor(private router: Router) {}
   goSpec() {
-    this.router.navigate(['user']);
+    this.router.navigate(['user/mike']);
   }
 
   goSignUp() {

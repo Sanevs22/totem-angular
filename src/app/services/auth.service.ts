@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Firestore, collection } from '@angular/fire/firestore';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import {
   addDoc,
   getDocs,
-  getDoc,
   getFirestore,
-  doc,
   query,
   where,
 } from 'firebase/firestore';
@@ -15,34 +13,52 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: AngularFireAuth, private firestore: Firestore) {}
+  constructor(private firestore: Firestore) {}
+  db = getFirestore();
+  auth = getAuth();
 
   async signUp(email: string, password: string, nickname: string) {
-    const db = getFirestore();
-    const queryEmail = query(
-      collection(db, 'user'),
+    const queryEmail = await query(
+      collection(this.db, 'user'),
       where('email', '==', email)
     );
     const emailSnapshot = await getDocs(queryEmail);
-    emailSnapshot.docs.forEach((i) => console.log(i));
-    if (emailSnapshot.docs.length === 0) {
-      try {
-        let user = await this.auth.createUserWithEmailAndPassword(
-          email,
-          password
-        );
-        await addDoc(collection(db, 'user'), {
-          id: user.user?.uid,
-          email: email,
-          nickname: nickname,
-        });
-        console.log(user.user);
-        return { code: 3, message: 'регистрация прошла успешно' };
-      } catch (err) {
-        return { code: 2, message: err };
-      }
-    } else {
-      return { code: 1, message: 'email занят' };
+    if (emailSnapshot.docs.length !== 0) {
+      return { code: 41, message: 'Этот email занят' };
+    }
+
+    const queryNickname = await query(
+      collection(this.db, 'user'),
+      where('nickname', '==', nickname)
+    );
+    const nicknameSnapshot = await getDocs(queryNickname);
+    if (nicknameSnapshot.docs.length !== 0) {
+      return { code: 42, message: 'Этот nickname занят' };
+    }
+
+    try {
+      let user = await createUserWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+      await addDoc(collection(this.db, 'user'), {
+        id: user.user?.uid,
+        email: email,
+        nickname: nickname,
+        name: 'Ваше имя',
+        about: 'Расскажите о себе коротко',
+        details: 'А тут можно подробнее',
+        avatar: 'assets/img/avatar.png',
+        totem: 'assets/img/totem.png',
+      });
+      return {
+        code: 21,
+        message: 'регистрация прошла успешно',
+        nickname: nickname,
+      };
+    } catch (err) {
+      return { code: 44, message: err };
     }
   }
 }

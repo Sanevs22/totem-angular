@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,8 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignUpComponent {
   constructor(
     private authService: AuthService,
+    private router: Router,
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService
   ) {}
+
   loader = false;
   form = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -39,7 +42,12 @@ export class SignUpComponent {
     this.alerts.open(status.message!).subscribe({
       complete: () => {},
     });
-    console.log(status.message);
-    console.log(this.form.value);
+    if (status.code === 21) {
+      this.router.navigate([`user/${status.nickname}`]);
+    }
+  }
+
+  goHome() {
+    this.router.navigate(['']);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   constructor(
     private authService: AuthService,
+    private router: Router,
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService
   ) {}
   loader = false;
@@ -29,5 +31,9 @@ export class LoginComponent {
       complete: () => {},
     });
     console.log(this.form.value);
+  }
+
+  goHome() {
+    this.router.navigate(['']);
   }
 }
