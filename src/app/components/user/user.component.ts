@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
     details: '',
     widgets: [],
   };
+  loader = true;
   constructor(
     private userAPIService: UserAPIService,
     private activatedRoute: ActivatedRoute,
@@ -25,12 +26,14 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let text = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(text);
-    if (this.userAPIService.user.nickname === text) {
-      this.user = this.userAPIService.user;
+    let nickname = this.activatedRoute.snapshot.paramMap.get('id');
+    if (nickname) {
+      this.userAPIService.getUser(nickname).then((user) => {
+        this.user = user;
+        this.loader = false;
+      });
     } else {
-      this.router.navigate(['sign']);
+      this.router.navigate(['']);
     }
   }
 }

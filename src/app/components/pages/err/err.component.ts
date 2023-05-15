@@ -23,31 +23,15 @@ import {
   `,
 })
 export class ErrComponent {
-  constructor(private firestore: Firestore) {
-    // const db = getFirestore();
-    // async function new22() {
-    //   docRef = await addDoc(collection(db, 'user'), {
-    //     first: 'Ada23432',
-    //     last: 'Lovel3223ace',
-    //     born: 1815,
-    //     lex: {
-    //       tes: '22',
-    //     },
-    //   });
-    //   console.log('Document written with ID: ', docRef.id);
-    // }
-    // new22();
-  }
+  constructor(private firestore: Firestore) {}
   db = getFirestore();
   auth = getAuth();
 
   log() {
     signInWithEmailAndPassword(this.auth, 'test7@ds.com', 'pass222323').then(
       (userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
-        // ...
       }
     );
   }
@@ -76,8 +60,3 @@ export class ErrComponent {
     });
   }
 }
-
-// const querySnapshot = await getDocs(collection(db, 'user'));
-// querySnapshot.forEach((doc) => {
-//   console.log(doc.data());
-// });
