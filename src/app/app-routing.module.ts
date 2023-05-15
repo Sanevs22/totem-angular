@@ -5,6 +5,7 @@ import { StartPageComponent } from './components/pages/start-page/start-page.com
 import { SignUpComponent } from './components/pages/sign-up/sign-up.component';
 import { ErrComponent } from './components/pages/err/err.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: '', component: StartPageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },
   { path: 'user/:id', component: UserComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'err', component: ErrComponent },
 ];
 

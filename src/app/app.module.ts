@@ -30,6 +30,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { ErrComponent } from './components/pages/err/err.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LoginComponent } from './components/pages/login/login.component';
     SignUpComponent,
     ErrComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
