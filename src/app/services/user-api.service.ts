@@ -11,6 +11,18 @@ export class UserAPIService {
   db = getFirestore();
   user!: User;
 
+  async getNickname(uid: string) {
+    const queryUid = await query(
+      collection(this.db, 'user'),
+      where('id', '==', uid)
+    );
+    let uidSnapshot = await getDocs(queryUid);
+    let userData = uidSnapshot.docs[0].data();
+    if (userData) {
+      return userData['nickname'];
+    }
+  }
+
   async getUser(nickname: string) {
     const queryNickname = await query(
       collection(this.db, 'user'),

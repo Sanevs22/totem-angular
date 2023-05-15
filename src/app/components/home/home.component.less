@@ -1,0 +1,105 @@
+.main {
+  box-sizing: border-box;
+  width: 340px;
+  height: 100%;
+  margin: 0px auto;
+  background: #19191d;
+}
+
+.user_header {
+  position: relative;
+  width: 340px;
+  height: 162px;
+  box-sizing: border-box;
+}
+
+.cover {
+  width: 340px;
+  height: 90px;
+  z-index: 1;
+  background: linear-gradient(
+    259.1deg,
+    #28c05c -23.39%,
+    rgba(135, 49, 70, 0.47) 97.16%
+  );
+  border-radius: 20px;
+  position: absolute;
+  top: 30px;
+}
+
+.totem {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  position: absolute;
+  left: 135px;
+  top: 6px;
+  z-index: 2;
+  & img {
+    max-width: 120px;
+    max-height: 120px;
+  }
+}
+
+.shadow {
+  width: 340px;
+  height: 48px;
+  background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 0 0 19px 19px;
+  position: absolute;
+  top: 72px;
+  z-index: 3;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  left: 16px;
+  top: 84px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+  & img {
+    max-width: 70px;
+    max-height: 70px;
+  }
+}
+
+.name {
+  width: 218px;
+  height: 40px;
+  padding-top: 6px;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 400px;
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+  top: 100px;
+  left: 96px;
+}
+
+.about {
+  width: 218px;
+  height: 18px;
+  color: #959595;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  top: 140px;
+  left: 96px;
+}
+
+.details {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.widgets {
+  margin: 10px 0;
+}

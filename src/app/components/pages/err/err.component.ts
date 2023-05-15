@@ -13,6 +13,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { Subscriber, Subscription } from 'rxjs';
+import { UserAPIService } from 'src/app/services/user-api.service';
 
 @Component({
   selector: 'app-err',
@@ -26,12 +27,17 @@ import { Subscriber, Subscription } from 'rxjs';
   `,
 })
 export class ErrComponent implements OnInit, OnDestroy {
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private userAPIService: UserAPIService
+  ) {}
   subscription$!: Subscription;
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
   }
   ngOnInit(): void {
+    this.userAPIService.getNickname('oyhjaGHH6mgrul9MsCRO7KMhRNX2');
+
     this.subscription$ = this.statusAuth.subscribe((data) =>
       console.log(22, data)
     );

@@ -4,7 +4,6 @@ import { Firestore, collection } from '@angular/fire/firestore';
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
@@ -24,53 +23,6 @@ export class AuthService {
   auth = getAuth();
 
   constructor(private firestore: Firestore) {}
-
-  async status() {
-    console.log(22, this.auth);
-  }
-
-  async userStatusSuper() {
-    let userStatusData = { isLogin: true, uIg: '', nickname: '' };
-    await onAuthStateChanged(this.auth, async (user) => {
-      if (user) {
-        console.log(user);
-        userStatusData.isLogin = true;
-        userStatusData.uIg = user.uid;
-        const queryEmail = await query(
-          collection(this.db, 'user'),
-          where('email', '==', user.email)
-        );
-        const emailSnapshot = await getDocs(queryEmail);
-        userStatusData.nickname = emailSnapshot.docs[0].data()['nickname'];
-        return userStatusData;
-      }
-      return userStatusData;
-    });
-  }
-
-  async userStatus() {
-    let userStatusData = { isLogin: true, uIg: '', nickname: '' };
-    await this.auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user);
-        userStatusData.isLogin = true;
-        userStatusData.uIg = user.uid;
-        // const queryEmail = query(
-        //   collection(this.db, 'user'),
-        //   where('email', '==', user.email)
-        // );
-        // const emailSnapshot = getDocs(queryEmail);
-        // emailSnapshot.then((data) => {
-        //   userStatusData.nickname = data.docs[0].data()['nickname'];
-        // });
-      } else {
-        userStatusData.isLogin = false;
-      }
-    });
-
-    console.log(userStatusData);
-    return userStatusData;
-  }
 
   async login(email: string, password: string) {
     try {
