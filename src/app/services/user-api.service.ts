@@ -17,6 +17,9 @@ export class UserAPIService {
       where('nickname', '==', nickname)
     );
     let nicknameSnapshot = await getDocs(queryNickname);
+    if (nicknameSnapshot.docs.length === 0) {
+      return null;
+    }
     let userData = nicknameSnapshot.docs[0].data();
     this.user = {
       nickname: userData['nickname'],
