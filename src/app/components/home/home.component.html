@@ -15,6 +15,17 @@
     <p class="details">
       {{ user.details }}
     </p>
+    <div class="tools">
+      <button
+        (click)="showDialog(template)"
+        class="open_editor"
+        tuiButton
+        size="s"
+        appearance="outline"
+      >
+        Редактировать профиль
+      </button>
+    </div>
     <div class="widgets">
       <app-widget
         *ngFor="let widget of user.widgets"
@@ -23,3 +34,82 @@
     </div>
   </div>
 </div>
+
+<ng-template #template let-observer>
+  <p>Изменить тотем</p>
+  <tui-carousel
+    class="carousel"
+    [draggable]="true"
+    [itemsCount]="1"
+    [(index)]="index"
+  >
+    <ng-container *ngFor="let item of items; let i = index">
+      <img
+        *tuiItem
+        alt="totem"
+        draggable="false"
+        src="assets/img/totem.png"
+        class="item"
+        [class.item_active]="i === index + 1"
+      />
+    </ng-container>
+  </tui-carousel>
+  <br />
+  <tui-pagination
+    size="s"
+    class="pagination"
+    [length]="items.length"
+    [(index)]="index"
+  ></tui-pagination>
+  <form [formGroup]="form">
+    <p>
+      <tui-input formControlName="name">
+        Имя
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.form.controls.name.invalid && this.form.controls.name.touched
+        "
+        error="Не больше 10 символов"
+      ></tui-error>
+    </p>
+    <p>
+      <tui-input formControlName="about">
+        Короткое описание
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.form.controls.about.invalid && this.form.controls.about.touched
+        "
+        error="Не больше 32 символов"
+      ></tui-error>
+    </p>
+    <tui-text-area
+      formControlName="details"
+      class="field-small"
+      [expandable]="true"
+    >
+      Подробнее расскажи о себе
+    </tui-text-area>
+    <tui-error
+      *ngIf="
+        this.form.controls.details.invalid && this.form.controls.about.touched
+      "
+      error="Не больше 120 символов"
+    ></tui-error>
+  </form>
+  <p>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="observer.complete(); updateUserData()"
+    >
+      Сохранить
+    </button>
+  </p>
+</ng-template>

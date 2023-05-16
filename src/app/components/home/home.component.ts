@@ -1,10 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { getAuth } from 'firebase/auth';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { UserAPIService } from 'src/app/services/user-api.service';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -22,12 +25,35 @@ export class HomeComponent implements OnInit, OnDestroy {
     widgets: [],
   };
   loader = true;
-  constructor(private userAPIService: UserAPIService, private router: Router) {}
+  constructor(
+    private userAPIService: UserAPIService,
+    private router: Router,
+    @Inject(TuiDialogService)
+    private readonly dialogs: TuiDialogService
+  ) {}
 
   subUserLogStatus$!: Subscription;
+  subEditor$!: Subscription;
 
   auth = getAuth();
   statusAuth = authState(this.auth);
+
+  form = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(11)]),
+    about: new FormControl('', [Validators.maxLength(32)]),
+    details: new FormControl('', [Validators.maxLength(120)]),
+  });
+
+  index = 0;
+
+  readonly items = [
+    'angular.svg',
+    'avatar.jpg',
+    'angular.svg',
+    'avatar.jpg',
+    'angular.svg',
+    'avatar.jpg',
+  ];
 
   ngOnInit(): void {
     this.subUserLogStatus$ = this.statusAuth.subscribe((user) => {
@@ -38,6 +64,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.userAPIService.getUser(nickname).then((user) => {
           if (user) {
             this.user = user;
+            this.form.controls.name.setValue(this.user.name);
+            this.form.controls.about.setValue(this.user.about);
+            this.form.controls.details.setValue(this.user.details);
             this.loader = false;
           }
         });
@@ -47,5 +76,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subUserLogStatus$.unsubscribe();
+    this.subEditor$.unsubscribe();
+  }
+
+  showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.form.controls.name.setValue(this.user.name);
+    this.form.controls.about.setValue(this.user.about);
+    this.form.controls.details.setValue(this.user.details);
+
+    this.subEditor$ = this.dialogs
+      .open(content, {
+        size: 's',
+      })
+      .subscribe(() => {});
+  }
+
+  updateUserData() {
+    this.userAPIService.updateUserData(
+      this.user.nickname,
+      this.form.controls.name.value!,
+      this.form.controls.about.value!,
+      this.form.controls.details.value!
+    );
+    this.ngOnInit();
   }
 }

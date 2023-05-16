@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection } from '@angular/fire/firestore';
-import { getDocs, getFirestore, query, where } from 'firebase/firestore';
+import {
+  doc,
+  getDocs,
+  getFirestore,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -44,6 +51,38 @@ export class UserAPIService {
     };
     console.log(this.user);
     return this.user;
+  }
+
+  async updateUserData(
+    nickname: string,
+    name: string,
+    about: string,
+    details: string
+  ) {
+    const queryEmail = query(
+      collection(this.db, 'user'),
+      where('nickname', '==', nickname)
+    );
+    const emailSnapshot = await getDocs(queryEmail);
+    let id = emailSnapshot.docs[0].id;
+    const userRef = doc(this.db, 'user', id);
+    await updateDoc(userRef, {
+      name: name,
+      about: about,
+      details: details,
+    });
+  }
+  async updateWidgetsData(nickname: string, widgets: []) {
+    const queryEmail = query(
+      collection(this.db, 'user'),
+      where('nickname', '==', nickname)
+    );
+    const emailSnapshot = await getDocs(queryEmail);
+    let id = emailSnapshot.docs[0].id;
+    const userRef = doc(this.db, 'user', id);
+    await updateDoc(userRef, {
+      widgets: widgets,
+    });
   }
 }
 

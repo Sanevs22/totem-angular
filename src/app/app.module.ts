@@ -21,7 +21,13 @@ import { HeaderComponent } from './components/widget/header/header.component';
 import { StartPageComponent } from './components/pages/start-page/start-page.component';
 import { SignUpComponent } from './components/pages/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TuiFieldErrorPipeModule, TuiInputModule } from '@taiga-ui/kit';
+import {
+  TuiCarouselModule,
+  TuiFieldErrorPipeModule,
+  TuiInputModule,
+  TuiPaginationModule,
+  TuiTextAreaModule,
+} from '@taiga-ui/kit';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -56,7 +62,10 @@ import { HomeComponent } from './components/home/home.component';
     TuiAlertModule,
     ReactiveFormsModule,
     TuiInputModule,
+    TuiTextAreaModule,
     TuiErrorModule,
+    TuiCarouselModule,
+    TuiPaginationModule,
     TuiFieldErrorPipeModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirestore(() => getFirestore()),
