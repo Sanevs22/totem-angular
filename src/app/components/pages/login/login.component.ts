@@ -32,9 +32,10 @@ export class LoginComponent {
       this.form.controls.password.value!
     );
     this.loader = false;
-    this.alerts.open('молодец').subscribe({
+    this.alerts.open('Вход выполнен').subscribe({
       complete: () => {},
     });
+    this.router.navigate(['home']);
     console.log(this.form.value);
   }
 

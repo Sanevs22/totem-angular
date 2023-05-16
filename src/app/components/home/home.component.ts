@@ -8,6 +8,7 @@ import { User } from 'src/app/interfaces/user';
 import { UserAPIService } from 'src/app/services/user-api.service';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Widget } from 'src/app/interfaces/widget';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   subUserLogStatus$!: Subscription;
   subEditor$!: Subscription;
+  subEditorWidget$!: Subscription;
 
   auth = getAuth();
   statusAuth = authState(this.auth);
@@ -42,6 +44,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     name: new FormControl('', [Validators.required, Validators.maxLength(11)]),
     about: new FormControl('', [Validators.maxLength(32)]),
     details: new FormControl('', [Validators.maxLength(120)]),
+  });
+
+  formWidget = new FormGroup({
+    header: new FormControl('', [Validators.maxLength(32)]),
   });
 
   index = 0;
@@ -77,9 +83,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subUserLogStatus$.unsubscribe();
     this.subEditor$.unsubscribe();
+    this.subEditorWidget$.unsubscribe();
   }
 
-  showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+  showDialogUserProfile(content: PolymorpheusContent<TuiDialogContext>): void {
     this.form.controls.name.setValue(this.user.name);
     this.form.controls.about.setValue(this.user.about);
     this.form.controls.details.setValue(this.user.details);
@@ -99,5 +106,28 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.form.controls.details.value!
     );
     this.ngOnInit();
+  }
+
+  showDialogAddWidget(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.subEditorWidget$ = this.dialogs
+      .open(content, {
+        size: 's',
+      })
+      .subscribe(() => {});
+  }
+
+  updateWidgetsData() {
+    let widget: Widget = {
+      type: 'header',
+      header: this.formWidget.controls.header.value!,
+    };
+    if (!this.user.widgets) {
+      this.user.widgets = [];
+    }
+    this.user.widgets.push(widget);
+    this.userAPIService.updateWidgetsData(
+      this.user.nickname,
+      this.user.widgets
+    );
   }
 }

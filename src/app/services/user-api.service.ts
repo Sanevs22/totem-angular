@@ -9,6 +9,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { User } from '../interfaces/user';
+import { Widget } from '../interfaces/widget';
 
 @Injectable({
   providedIn: 'root',
@@ -72,7 +73,7 @@ export class UserAPIService {
       details: details,
     });
   }
-  async updateWidgetsData(nickname: string, widgets: []) {
+  async updateWidgetsData(nickname: string, widgets: Widget[]) {
     const queryEmail = query(
       collection(this.db, 'user'),
       where('nickname', '==', nickname)

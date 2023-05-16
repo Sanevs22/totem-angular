@@ -7,6 +7,8 @@ import {
   TuiThemeNightModule,
   TuiButtonModule,
   TuiErrorModule,
+  TuiDataListModule,
+  TuiHostedDropdownModule,
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -66,6 +68,8 @@ import { HomeComponent } from './components/home/home.component';
     TuiErrorModule,
     TuiCarouselModule,
     TuiPaginationModule,
+    TuiDataListModule,
+    TuiHostedDropdownModule,
     TuiFieldErrorPipeModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirestore(() => getFirestore()),

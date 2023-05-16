@@ -17,7 +17,7 @@
     </p>
     <div class="tools">
       <button
-        (click)="showDialog(template)"
+        (click)="showDialogUserProfile(userProfile)"
         class="open_editor"
         tuiButton
         size="s"
@@ -32,10 +32,29 @@
         [widget]="widget"
       ></app-widget>
     </div>
+    <div class="widgets_tools">
+      <tui-hosted-dropdown tuiDropdownAlign="center" [content]="content">
+        <button
+          icon="tuiIconPlus"
+          tuiIconButton
+          size="m"
+          appearance="outline"
+        ></button>
+      </tui-hosted-dropdown>
+    </div>
   </div>
 </div>
 
-<ng-template #template let-observer>
+<ng-template #content>
+  <tui-data-list>
+    <button tuiOption type="button" (click)="showDialogAddWidget(AddWidget)">
+      Заголовок
+    </button>
+    <button tuiOption type="button">Ссылка</button>
+  </tui-data-list>
+</ng-template>
+
+<ng-template #userProfile let-observer>
   <p>Изменить тотем</p>
   <tui-carousel
     class="carousel"
@@ -110,6 +129,36 @@
       (click)="observer.complete(); updateUserData()"
     >
       Сохранить
+    </button>
+  </p>
+</ng-template>
+
+<ng-template #AddWidget let-observer>
+  <form [formGroup]="formWidget">
+    <p>
+      <tui-input formControlName="header">
+        Текст заголовка
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.formWidget.controls.header.invalid &&
+          this.formWidget.controls.header.touched
+        "
+        error="Не больше 32 символов"
+      ></tui-error>
+    </p>
+  </form>
+  <p>
+    <button
+      tuiButton
+      [disabled]="formWidget.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="observer.complete(); updateWidgetsData()"
+    >
+      добавить
     </button>
   </p>
 </ng-template>
