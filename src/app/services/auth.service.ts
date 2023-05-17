@@ -79,7 +79,7 @@ export class AuthService {
         about: 'Расскажите о себе коротко',
         details: 'А тут можно подробнее',
         avatar: 'assets/img/avatar.png',
-        totem: 'assets/img/totem.png',
+        totem: 'assets/totem/totem1.png',
       });
       return {
         code: 21,

@@ -9,6 +9,7 @@ import { UserAPIService } from 'src/app/services/user-api.service';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Widget } from 'src/app/interfaces/widget';
+import { MediaService } from 'src/app/services/media.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   loader = true;
   constructor(
     private userAPIService: UserAPIService,
+    private mediaService: MediaService,
     private router: Router,
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService
@@ -40,6 +42,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   auth = getAuth();
   statusAuth = authState(this.auth);
 
+  index = 0;
+  totems = this.mediaService.totem;
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(11)]),
     about: new FormControl('', [Validators.maxLength(32)]),
@@ -49,17 +54,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   formWidget = new FormGroup({
     header: new FormControl('', [Validators.maxLength(32)]),
   });
-
-  index = 0;
-
-  readonly items = [
-    'angular.svg',
-    'avatar.jpg',
-    'angular.svg',
-    'avatar.jpg',
-    'angular.svg',
-    'avatar.jpg',
-  ];
 
   ngOnInit(): void {
     this.subUserLogStatus$ = this.statusAuth.subscribe((user) => {
@@ -89,6 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.subEditor$.unsubscribe();
     }
     if (this.subEditorWidget$) {
+      this.subEditorWidget$.unsubscribe();
     }
   }
 
@@ -96,6 +91,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.form.controls.name.setValue(this.user.name);
     this.form.controls.about.setValue(this.user.about);
     this.form.controls.details.setValue(this.user.details);
+    this.index = this.mediaService.totem.indexOf(this.user.totem);
 
     this.subEditor$ = this.dialogs
       .open(content, {
@@ -109,7 +105,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.user.nickname,
       this.form.controls.name.value!,
       this.form.controls.about.value!,
-      this.form.controls.details.value!
+      this.form.controls.details.value!,
+      this.mediaService.totem[this.index]
     );
     this.ngOnInit();
   }

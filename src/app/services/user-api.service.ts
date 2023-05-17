@@ -58,7 +58,8 @@ export class UserAPIService {
     nickname: string,
     name: string,
     about: string,
-    details: string
+    details: string,
+    totem: string
   ) {
     const queryEmail = query(
       collection(this.db, 'user'),
@@ -71,6 +72,7 @@ export class UserAPIService {
       name: name,
       about: about,
       details: details,
+      totem: totem,
     });
   }
   async updateWidgetsData(nickname: string, widgets: Widget[]) {

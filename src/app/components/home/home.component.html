@@ -62,22 +62,15 @@
     [itemsCount]="1"
     [(index)]="index"
   >
-    <ng-container *ngFor="let item of items; let i = index">
-      <img
-        *tuiItem
-        alt="totem"
-        draggable="false"
-        src="assets/img/totem.png"
-        class="item"
-        [class.item_active]="i === index + 1"
-      />
+    <ng-container *ngFor="let totem of totems">
+      <img *tuiItem alt="totem" draggable="false" [src]="totem" class="item" />
     </ng-container>
   </tui-carousel>
   <br />
   <tui-pagination
     size="s"
     class="pagination"
-    [length]="items.length"
+    [length]="totems.length"
     [(index)]="index"
   ></tui-pagination>
   <form [formGroup]="form">
