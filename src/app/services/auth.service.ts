@@ -25,17 +25,25 @@ export class AuthService {
   constructor(private firestore: Firestore) {}
 
   async login(email: string, password: string) {
-    try {
-      let loginUser = await signInWithEmailAndPassword(
-        this.auth,
-        email,
-        password
-      );
-      console.log(loginUser.user.uid);
-      return { code: 21, message: 'login' };
-    } catch (err) {
-      return { code: 44, message: err };
+    await this.auth.signOut();
+    const queryEmail = await query(
+      collection(this.db, 'user'),
+      where('email', '==', email)
+    );
+    const emailSnapshot = await getDocs(queryEmail);
+    if (emailSnapshot.docs.length === 0) {
+      return { code: 41, message: 'Этот email не найден' };
     }
+    try {
+      await signInWithEmailAndPassword(this.auth, email, password);
+      return { code: 21, message: 'Вход выполнен' };
+    } catch (err) {
+      return { code: 44, message: 'Неверный пароль' };
+    }
+  }
+
+  async logOut() {
+    await this.auth.signOut();
   }
 
   async signUp(email: string, password: string, nickname: string) {

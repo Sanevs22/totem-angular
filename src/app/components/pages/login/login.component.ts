@@ -27,19 +27,20 @@ export class LoginComponent {
 
   async login() {
     this.loader = true;
-    await this.authService.login(
+    let status = await this.authService.login(
       this.form.controls.email.value!,
       this.form.controls.password.value!
     );
     this.loader = false;
-    this.alerts.open('Вход выполнен').subscribe({
+    this.alerts.open(status.message!).subscribe({
       complete: () => {},
     });
-    this.router.navigate(['home']);
-    console.log(this.form.value);
+    if (status.code === 21) {
+      this.router.navigate(['']);
+    }
   }
 
   goHome() {
-    this.router.navigate(['']);
+    this.router.navigate(['start']);
   }
 }

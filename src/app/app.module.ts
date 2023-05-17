@@ -27,6 +27,7 @@ import {
   TuiCarouselModule,
   TuiFieldErrorPipeModule,
   TuiInputModule,
+  TuiInputPasswordModule,
   TuiPaginationModule,
   TuiTextAreaModule,
 } from '@taiga-ui/kit';
@@ -70,6 +71,7 @@ export function playerFactory() {
     TuiAlertModule,
     ReactiveFormsModule,
     TuiInputModule,
+    TuiInputPasswordModule,
     TuiTextAreaModule,
     TuiErrorModule,
     TuiCarouselModule,

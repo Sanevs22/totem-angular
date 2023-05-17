@@ -33,11 +33,13 @@ export class UserComponent implements OnInit {
           this.user = user;
           this.loader = false;
         } else {
-          this.router.navigate(['']);
+          // TO DO navigate to err-page
+          this.router.navigate(['start']);
         }
       });
     } else {
-      this.router.navigate(['']);
+      // TO DO navigate to err-page user not found
+      this.router.navigate(['start']);
     }
   }
 }

@@ -64,26 +64,32 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subUserLogStatus$ = this.statusAuth.subscribe((user) => {
       if (!user) {
-        this.router.navigate(['login']);
-      }
-      this.userAPIService.getNickname(user?.uid!).then((nickname) => {
-        this.userAPIService.getUser(nickname).then((user) => {
-          if (user) {
-            this.user = user;
-            this.form.controls.name.setValue(this.user.name);
-            this.form.controls.about.setValue(this.user.about);
-            this.form.controls.details.setValue(this.user.details);
-            this.loader = false;
-          }
+        this.router.navigate(['start']);
+      } else {
+        this.userAPIService.getNickname(user?.uid!).then((nickname) => {
+          this.userAPIService.getUser(nickname).then((user) => {
+            if (user) {
+              this.user = user;
+              this.form.controls.name.setValue(this.user.name);
+              this.form.controls.about.setValue(this.user.about);
+              this.form.controls.details.setValue(this.user.details);
+              this.loader = false;
+            }
+          });
         });
-      });
+      }
     });
   }
 
   ngOnDestroy(): void {
-    this.subUserLogStatus$.unsubscribe();
-    this.subEditor$.unsubscribe();
-    this.subEditorWidget$.unsubscribe();
+    if (this.subUserLogStatus$) {
+      this.subUserLogStatus$.unsubscribe();
+    }
+    if (this.subEditor$) {
+      this.subEditor$.unsubscribe();
+    }
+    if (this.subEditorWidget$) {
+    }
   }
 
   showDialogUserProfile(content: PolymorpheusContent<TuiDialogContext>): void {

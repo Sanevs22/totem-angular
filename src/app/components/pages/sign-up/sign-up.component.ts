@@ -43,11 +43,11 @@ export class SignUpComponent {
       complete: () => {},
     });
     if (status.code === 21) {
-      this.router.navigate([`user/${status.nickname}`]);
+      this.router.navigate(['']);
     }
   }
 
   goHome() {
-    this.router.navigate(['']);
+    this.router.navigate(['start']);
   }
 }
