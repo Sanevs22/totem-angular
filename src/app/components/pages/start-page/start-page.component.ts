@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-start-page',
@@ -8,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class StartPageComponent {
   constructor(private router: Router) {}
-  goSpec() {
-    this.router.navigate(['user/mike']);
-  }
+
+  options: AnimationOptions = {
+    path: 'assets/lottie/pages/start-page.json',
+    loop: true,
+    autoplay: true,
+  };
 
   goSignUp() {
     this.router.navigate(['sign']);

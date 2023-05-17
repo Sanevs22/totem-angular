@@ -27,6 +27,8 @@
     "@tinkoff/ng-dompurify": "3.0.0",
     "dompurify": "2.2.9",
     "firebase": "^9.22.0",
+    "lottie-web": "^5.11.0",
+    "ngx-lottie": "^10.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.12.0"

@@ -36,9 +36,15 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 import { ErrComponent } from './components/pages/err/err.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
@@ -71,6 +77,7 @@ import { HomeComponent } from './components/home/home.component';
     TuiDataListModule,
     TuiHostedDropdownModule,
     TuiFieldErrorPipeModule,
+    LottieModule.forRoot({ player: playerFactory }),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
