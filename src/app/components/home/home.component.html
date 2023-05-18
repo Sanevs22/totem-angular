@@ -1,5 +1,17 @@
 <div class="main">
   <div *ngIf="!loader">
+    <div class="user_status">
+      <tui-hosted-dropdown tuiDropdownAlign="left" [content]="userStatusButton">
+        <button
+          tuiButton
+          size="s"
+          appearance="outline"
+          icon="tuiIconToggleRight"
+        >
+          {{ user.nickname }}
+        </button>
+      </tui-hosted-dropdown>
+    </div>
     <div class="user_header">
       <div class="totem">
         <img [src]="user.totem" alt="totem" />
@@ -48,6 +60,12 @@
     </div>
   </div>
 </div>
+
+<ng-template #userStatusButton>
+  <tui-data-list size="s">
+    <button tuiOption type="button" size="xs" (click)="logOut()">Выйти</button>
+  </tui-data-list>
+</ng-template>
 
 <ng-template #addWidgetButton>
   <tui-data-list>

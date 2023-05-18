@@ -10,6 +10,7 @@ import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Widget } from 'src/app/interfaces/widget';
 import { MediaService } from 'src/app/services/media.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -51,6 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private userAPIService: UserAPIService,
+    private authService: AuthService,
     private mediaService: MediaService,
     private router: Router,
     @Inject(TuiDialogService)
@@ -90,6 +92,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.subEditorAvatar$) {
       this.subEditorAvatar$.unsubscribe();
     }
+  }
+
+  logOut() {
+    this.authService.logOut();
   }
 
   showDialogUserProfile(content: PolymorpheusContent<TuiDialogContext>): void {
