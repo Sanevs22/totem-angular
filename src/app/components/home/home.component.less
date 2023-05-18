@@ -1,3 +1,5 @@
+@import "@taiga-ui/core/styles/taiga-ui-local.less";
+
 .main {
   box-sizing: border-box;
   width: 340px;
@@ -146,4 +148,37 @@
 
 .widgets {
   margin: 10px 0;
+}
+
+.tiles {
+  gap: 1rem;
+  grid-auto-rows: minmax(var(--tui-height-m), auto);
+  margin: 20px 0;
+}
+
+.content {
+  .transition(box-shadow);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background: var(--tui-base-01);
+  border-radius: var(--tui-radius-l);
+  border: 1px solid var(--tui-base-03);
+  cursor: ns-resize;
+
+  tui-tile._dragged & {
+    .shadow(5);
+  }
+}
+
+.widgets_editor {
+  padding-bottom: 20px;
+}
+
+.widget_item_editor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
 }

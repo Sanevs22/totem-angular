@@ -39,11 +39,49 @@
         Редактировать профиль
       </button>
     </div>
-    <div class="widgets">
+    <div class="widgets" *ngIf="!widgetEditorActive">
       <app-widget
         *ngFor="let widget of user.widgets"
         [widget]="widget"
       ></app-widget>
+    </div>
+    <div class="widgets_editor" *ngIf="widgetEditorActive">
+      <tui-tiles #tiles class="tiles" [debounce]="500" [(order)]="order">
+        <tui-tile
+          *ngFor="let item of user.widgets; let index = index"
+          tuiTileHandle
+          class="tile"
+          [style.order]="order.get(index)"
+        >
+          <div class="content" (mouseup)="(dragAndDrop)">
+            <div class="widget_item_editor">
+              <div>
+                {{ item.header }}
+              </div>
+              <div>
+                <button
+                  icon="tuiIconXLarge"
+                  tuiIconButton
+                  size="s"
+                  appearance="outline"
+                  (click)="deleteWidget(index)"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </tui-tile>
+      </tui-tiles>
+      <div class="tools">
+        <button
+          class="open_editor"
+          tuiButton
+          size="s"
+          appearance="outline"
+          (click)="closeWidgetEditor()"
+        >
+          Закрыть редактор
+        </button>
+      </div>
     </div>
     <div class="widgets_tools">
       <tui-hosted-dropdown
@@ -82,6 +120,9 @@
       (click)="showDialogAddWidget(AddWidget, 'link')"
     >
       Ссылка
+    </button>
+    <button tuiOption type="button" (click)="openWidgetEditor()">
+      Изменить
     </button>
   </tui-data-list>
 </ng-template>

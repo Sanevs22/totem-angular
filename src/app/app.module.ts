@@ -30,6 +30,7 @@ import {
   TuiInputPasswordModule,
   TuiPaginationModule,
   TuiTextAreaModule,
+  TuiTilesModule,
 } from '@taiga-ui/kit';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -83,6 +84,7 @@ export function playerFactory() {
     TuiDataListModule,
     TuiHostedDropdownModule,
     TuiFieldErrorPipeModule,
+    TuiTilesModule,
     LottieModule.forRoot({ player: playerFactory }),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirestore(() => getFirestore()),

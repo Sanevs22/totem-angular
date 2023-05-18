@@ -41,6 +41,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   index = 0;
   totems = this.mediaService.totem;
 
+  order = new Map();
+  widgetEditorActive = false;
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(11)]),
     about: new FormControl('', [Validators.maxLength(32)]),
@@ -141,5 +144,40 @@ export class HomeComponent implements OnInit, OnDestroy {
         size: 's',
       })
       .subscribe(() => {});
+  }
+
+  openWidgetEditor() {
+    this.widgetEditorActive = true;
+  }
+
+  closeWidgetEditor() {
+    let tempWid = [];
+    if (this.order.size) {
+      for (let i = 0; i < this.order.size; i++) {
+        tempWid[this.order.get(i)] = this.user.widgets[i];
+      }
+      this.user.widgets = tempWid;
+      this.order = new Map();
+    }
+
+    this.userAPIService
+      .updateWidgetsData(this.user.nickname, this.user.widgets)
+      .then(() => {
+        this.widgetEditorActive = false;
+      });
+  }
+
+  deleteWidget(index: number) {
+    this.user.widgets.splice(index, 1);
+    this.order = new Map();
+  }
+
+  dragAndDrop() {
+    let tempWid = [];
+    for (let i = 0; i < this.order.size; i++) {
+      tempWid[this.order.get(i)] = this.user.widgets[i];
+    }
+    this.user.widgets = tempWid;
+    console.log(tempWid);
   }
 }
