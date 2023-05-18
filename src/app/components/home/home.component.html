@@ -69,10 +69,20 @@
 
 <ng-template #addWidgetButton>
   <tui-data-list>
-    <button tuiOption type="button" (click)="showDialogAddWidget(AddWidget)">
+    <button
+      tuiOption
+      type="button"
+      (click)="showDialogAddWidget(AddWidget, 'header')"
+    >
       Заголовок
     </button>
-    <button tuiOption type="button">Ссылка</button>
+    <button
+      tuiOption
+      type="button"
+      (click)="showDialogAddWidget(AddWidget, 'link')"
+    >
+      Ссылка
+    </button>
   </tui-data-list>
 </ng-template>
 
@@ -155,31 +165,8 @@
 </ng-template>
 
 <ng-template #AddWidget let-observer>
-  <form [formGroup]="formWidget">
-    <p>
-      <tui-input formControlName="header">
-        Текст заголовка
-        <input tuiTextfield />
-      </tui-input>
-      <tui-error
-        *ngIf="
-          this.formWidget.controls.header.invalid &&
-          this.formWidget.controls.header.touched
-        "
-        error="Не больше 32 символов"
-      ></tui-error>
-    </p>
-  </form>
-  <p>
-    <button
-      tuiButton
-      [disabled]="formWidget.invalid"
-      type="button"
-      size="m"
-      class="tui-space_right-3"
-      (click)="observer.complete(); updateWidgetsData()"
-    >
-      добавить
-    </button>
-  </p>
+  <app-widget-editor
+    [widgetType]="widgetType"
+    (widgetLoaded)="observer.complete()"
+  ></app-widget-editor>
 </ng-template>

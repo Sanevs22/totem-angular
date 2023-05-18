@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     widgets: [],
   };
   loader = true;
+  widgetType!: string;
 
   subUserLogStatus$!: Subscription;
   subEditor$!: Subscription;
@@ -122,27 +123,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.ngOnInit();
   }
 
-  showDialogAddWidget(content: PolymorpheusContent<TuiDialogContext>): void {
+  showDialogAddWidget(
+    content: PolymorpheusContent<TuiDialogContext>,
+    widgetType: string
+  ): void {
+    this.widgetType = widgetType;
     this.subEditorWidget$ = this.dialogs
       .open(content, {
         size: 's',
       })
       .subscribe(() => {});
-  }
-
-  updateWidgetsData() {
-    let widget: Widget = {
-      type: 'header',
-      header: this.formWidget.controls.header.value!,
-    };
-    if (!this.user.widgets) {
-      this.user.widgets = [];
-    }
-    this.user.widgets.push(widget);
-    this.userAPIService.updateWidgetsData(
-      this.user.nickname,
-      this.user.widgets
-    );
   }
 
   showDialogChangeAvatar(content: PolymorpheusContent<TuiDialogContext>): void {

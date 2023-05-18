@@ -43,6 +43,7 @@ import { ErrComponent } from './components/pages/err/err.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { AvatarEditorComponent } from './components/home/avatar-editor/avatar-editor.component';
+import { WidgetEditorComponent } from './components/home/widget-editor/widget-editor.component';
 
 export function playerFactory() {
   return player;
@@ -61,6 +62,7 @@ export function playerFactory() {
     LoginComponent,
     HomeComponent,
     AvatarEditorComponent,
+    WidgetEditorComponent,
   ],
   imports: [
     BrowserModule,

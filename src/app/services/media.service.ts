@@ -21,6 +21,14 @@ export class MediaService {
     'assets/totem/totem8.png',
   ];
 
+  readonly icons = [
+    'assets/icon/icon1.png',
+    'assets/icon/icon2.png',
+    'assets/icon/icon3.png',
+    'assets/icon/icon4.png',
+    'assets/icon/icon5.png',
+  ];
+
   async uploadAvatar(nickname: string, image: File) {
     const avatarRef = ref(this.storage, `avatars/${nickname}.jpg`);
     await uploadBytes(avatarRef, image);

@@ -1,0 +1,91 @@
+<div *ngIf="widgetType === 'header'">
+  <form [formGroup]="formWidget">
+    <p>
+      <tui-input formControlName="header">
+        Текст заголовка
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.formWidget.controls.header.invalid &&
+          this.formWidget.controls.header.touched
+        "
+        error="Не больше 32 символов"
+      ></tui-error>
+    </p>
+  </form>
+  <p>
+    <button
+      tuiButton
+      [disabled]="formWidget.controls.header.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="updateWidgetsHeader()"
+    >
+      добавить
+    </button>
+  </p>
+</div>
+
+<div *ngIf="widgetType === 'link'">
+  <p>Изменить тотем</p>
+  <tui-carousel
+    class="carousel"
+    [draggable]="true"
+    [itemsCount]="1"
+    [(index)]="index"
+  >
+    <ng-container *ngFor="let icon of icons">
+      <img *tuiItem alt="totem" draggable="false" [src]="icon" class="item" />
+    </ng-container>
+  </tui-carousel>
+  <br />
+  <tui-pagination
+    size="s"
+    class="pagination"
+    [length]="icons.length"
+    [(index)]="index"
+  ></tui-pagination>
+
+  <form [formGroup]="formWidget">
+    <p>
+      <tui-input formControlName="header">
+        Заголовок ссылки
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.formWidget.controls.header.invalid &&
+          this.formWidget.controls.header.touched
+        "
+        error="Не больше 32 символов"
+      ></tui-error>
+    </p>
+    <p>
+      <tui-input formControlName="url">
+        url адрес
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.formWidget.controls.url.invalid &&
+          this.formWidget.controls.url.touched
+        "
+        error="Обязательное поле"
+      ></tui-error>
+    </p>
+  </form>
+  <p>
+    <button
+      tuiButton
+      [disabled]="formWidget.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="updateWidgetsLink()"
+    >
+      добавить
+    </button>
+  </p>
+</div>
