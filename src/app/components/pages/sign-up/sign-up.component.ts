@@ -27,7 +27,7 @@ export class SignUpComponent {
     nickname: new FormControl(null, [
       Validators.required,
       Validators.minLength(3),
-      Validators.pattern('^[a-z]+$'),
+      Validators.pattern('^[a-z0-9]+$'),
     ]),
   });
 
