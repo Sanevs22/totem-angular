@@ -6,7 +6,8 @@
       </div>
       <div class="shadow"></div>
       <div class="cover"></div>
-      <div class="avatar">
+      <div class="avatar" (click)="showDialogChangeAvatar(changeAvatar)">
+        <div class="avatar_change">ред.</div>
         <img [src]="user.avatar" alt="avatar" />
       </div>
       <div class="name">{{ user.name }}</div>
@@ -33,7 +34,10 @@
       ></app-widget>
     </div>
     <div class="widgets_tools">
-      <tui-hosted-dropdown tuiDropdownAlign="center" [content]="content">
+      <tui-hosted-dropdown
+        tuiDropdownAlign="center"
+        [content]="addWidgetButton"
+      >
         <button
           icon="tuiIconPlus"
           tuiIconButton
@@ -45,13 +49,19 @@
   </div>
 </div>
 
-<ng-template #content>
+<ng-template #addWidgetButton>
   <tui-data-list>
     <button tuiOption type="button" (click)="showDialogAddWidget(AddWidget)">
       Заголовок
     </button>
     <button tuiOption type="button">Ссылка</button>
   </tui-data-list>
+</ng-template>
+
+<ng-template #changeAvatar let-observer>
+  <app-avatar-editor
+    (avatarLoaded)="observer.complete(); ngOnInit()"
+  ></app-avatar-editor>
 </ng-template>
 
 <ng-template #userProfile let-observer>

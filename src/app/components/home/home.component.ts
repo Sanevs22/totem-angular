@@ -27,17 +27,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     widgets: [],
   };
   loader = true;
-  constructor(
-    private userAPIService: UserAPIService,
-    private mediaService: MediaService,
-    private router: Router,
-    @Inject(TuiDialogService)
-    private readonly dialogs: TuiDialogService
-  ) {}
 
   subUserLogStatus$!: Subscription;
   subEditor$!: Subscription;
   subEditorWidget$!: Subscription;
+  subEditorAvatar$!: Subscription;
 
   auth = getAuth();
   statusAuth = authState(this.auth);
@@ -54,6 +48,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   formWidget = new FormGroup({
     header: new FormControl('', [Validators.maxLength(32)]),
   });
+
+  constructor(
+    private userAPIService: UserAPIService,
+    private mediaService: MediaService,
+    private router: Router,
+    @Inject(TuiDialogService)
+    private readonly dialogs: TuiDialogService
+  ) {}
 
   ngOnInit(): void {
     this.subUserLogStatus$ = this.statusAuth.subscribe((user) => {
@@ -84,6 +86,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     if (this.subEditorWidget$) {
       this.subEditorWidget$.unsubscribe();
+    }
+    if (this.subEditorAvatar$) {
+      this.subEditorAvatar$.unsubscribe();
     }
   }
 
@@ -132,5 +137,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.user.nickname,
       this.user.widgets
     );
+  }
+
+  showDialogChangeAvatar(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.subEditorAvatar$ = this.dialogs
+      .open(content, {
+        size: 's',
+      })
+      .subscribe(() => {});
   }
 }

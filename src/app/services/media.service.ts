@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { UserAPIService } from './user-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MediaService {
-  constructor() {}
+  storage = getStorage();
+
+  constructor(private userAPIService: UserAPIService) {}
 
   readonly totem = [
     'assets/totem/totem1.png',
@@ -16,4 +20,12 @@ export class MediaService {
     'assets/totem/totem7.png',
     'assets/totem/totem8.png',
   ];
+
+  async uploadAvatar(nickname: string, image: File) {
+    const avatarRef = ref(this.storage, `avatars/${nickname}.jpg`);
+    await uploadBytes(avatarRef, image);
+    const url = await getDownloadURL(avatarRef);
+    await this.userAPIService.updateAvatarData(nickname, url);
+    return { code: 22, message: 'Изображение загружено' };
+  }
 }

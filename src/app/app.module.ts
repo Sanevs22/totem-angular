@@ -42,6 +42,7 @@ import player from 'lottie-web';
 import { ErrComponent } from './components/pages/err/err.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { AvatarEditorComponent } from './components/home/avatar-editor/avatar-editor.component';
 
 export function playerFactory() {
   return player;
@@ -59,6 +60,7 @@ export function playerFactory() {
     ErrComponent,
     LoginComponent,
     HomeComponent,
+    AvatarEditorComponent,
   ],
   imports: [
     BrowserModule,

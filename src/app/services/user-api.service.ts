@@ -87,6 +87,18 @@ export class UserAPIService {
       widgets: widgets,
     });
   }
+  async updateAvatarData(nickname: string, url: string) {
+    const queryEmail = query(
+      collection(this.db, 'user'),
+      where('nickname', '==', nickname)
+    );
+    const emailSnapshot = await getDocs(queryEmail);
+    let id = emailSnapshot.docs[0].id;
+    const userRef = doc(this.db, 'user', id);
+    await updateDoc(userRef, {
+      avatar: url,
+    });
+  }
 }
 
 // user = {
