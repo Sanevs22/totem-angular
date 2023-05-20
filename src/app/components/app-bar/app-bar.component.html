@@ -1,0 +1,33 @@
+<div class="position">
+  <div class="group">
+    <div tuiGroup [collapsed]="true">
+      <button
+        tuiIconButton
+        type="button"
+        appearance="outline"
+        size="l"
+        icon="tuiIconHomeLarge"
+        class="tui-group__auto-width-item"
+        [ngClass]="{ active_page: router === 'home' }"
+      ></button>
+      <button
+        tuiIconButton
+        type="button"
+        appearance="outline"
+        size="l"
+        icon="tuiIconShare2Large"
+        class="tui-group__auto-width-item"
+        [ngClass]="{ active_page: router === 'qr' }"
+      ></button>
+      <button
+        tuiIconButton
+        type="button"
+        appearance="outline"
+        size="l"
+        icon="tuiIconUsersLarge"
+        class="tui-group__auto-width-item"
+        [ngClass]="{ active_page: router === 'contacts' }"
+      ></button>
+    </div>
+  </div>
+</div>

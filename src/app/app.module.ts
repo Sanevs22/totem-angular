@@ -9,6 +9,7 @@ import {
   TuiErrorModule,
   TuiDataListModule,
   TuiHostedDropdownModule,
+  TuiGroupModule,
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -45,6 +46,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { AvatarEditorComponent } from './components/home/avatar-editor/avatar-editor.component';
 import { WidgetEditorComponent } from './components/home/widget-editor/widget-editor.component';
+import { AppBarComponent } from './components/app-bar/app-bar.component';
 
 export function playerFactory() {
   return player;
@@ -64,6 +66,7 @@ export function playerFactory() {
     HomeComponent,
     AvatarEditorComponent,
     WidgetEditorComponent,
+    AppBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +87,7 @@ export function playerFactory() {
     TuiDataListModule,
     TuiHostedDropdownModule,
     TuiFieldErrorPipeModule,
+    TuiGroupModule,
     TuiTilesModule,
     LottieModule.forRoot({ player: playerFactory }),
     AngularFireModule.initializeApp(environment.firebase),
