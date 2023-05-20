@@ -8,15 +8,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppBarComponent implements OnInit {
   @Input()
-  router!: string;
-
+  route!: string;
+  constructor(private router: Router) {}
   ngOnInit(): void {
     console.log(this.router);
   }
 
-  goHome() {}
+  goHome() {
+    this.router.navigate(['']);
+  }
 
-  goQr() {}
+  goShare() {
+    this.router.navigate(['share']);
+  }
 
   goContacts() {}
 }

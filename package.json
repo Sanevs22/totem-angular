@@ -28,6 +28,7 @@
     "dompurify": "2.2.9",
     "firebase": "^9.22.0",
     "lottie-web": "^5.11.0",
+    "ng-qrcode": "^8.0.1",
     "ngx-lottie": "^10.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

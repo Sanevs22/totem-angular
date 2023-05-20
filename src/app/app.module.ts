@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   TuiCarouselModule,
   TuiFieldErrorPipeModule,
+  TuiInputCopyModule,
   TuiInputModule,
   TuiInputPasswordModule,
   TuiPaginationModule,
@@ -47,6 +48,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AvatarEditorComponent } from './components/home/avatar-editor/avatar-editor.component';
 import { WidgetEditorComponent } from './components/home/widget-editor/widget-editor.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
+import { ShareComponent } from './components/share/share.component';
+import { QrCodeModule } from 'ng-qrcode';
 
 export function playerFactory() {
   return player;
@@ -67,6 +70,7 @@ export function playerFactory() {
     AvatarEditorComponent,
     WidgetEditorComponent,
     AppBarComponent,
+    ShareComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,7 @@ export function playerFactory() {
     TuiInputModule,
     TuiInputPasswordModule,
     TuiTextAreaModule,
+    TuiInputCopyModule,
     TuiErrorModule,
     TuiCarouselModule,
     TuiPaginationModule,
@@ -89,6 +94,7 @@ export function playerFactory() {
     TuiFieldErrorPipeModule,
     TuiGroupModule,
     TuiTilesModule,
+    QrCodeModule,
     LottieModule.forRoot({ player: playerFactory }),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirestore(() => getFirestore()),

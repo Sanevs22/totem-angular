@@ -6,10 +6,12 @@ import { SignUpComponent } from './components/pages/sign-up/sign-up.component';
 import { ErrComponent } from './components/pages/err/err.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { ShareComponent } from './components/share/share.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'start', component: StartPageComponent },
+  { path: 'share', component: ShareComponent },
   { path: 'sign', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },

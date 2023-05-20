@@ -8,7 +8,8 @@
         size="l"
         icon="tuiIconHomeLarge"
         class="tui-group__auto-width-item"
-        [ngClass]="{ active_page: router === 'home' }"
+        [ngClass]="{ active_page: route === 'home' }"
+        (click)="goHome()"
       ></button>
       <button
         tuiIconButton
@@ -17,7 +18,8 @@
         size="l"
         icon="tuiIconShare2Large"
         class="tui-group__auto-width-item"
-        [ngClass]="{ active_page: router === 'qr' }"
+        [ngClass]="{ active_page: route === 'share' }"
+        (click)="goShare()"
       ></button>
       <button
         tuiIconButton
@@ -26,7 +28,7 @@
         size="l"
         icon="tuiIconUsersLarge"
         class="tui-group__auto-width-item"
-        [ngClass]="{ active_page: router === 'contacts' }"
+        [ngClass]="{ active_page: route === 'contacts' }"
       ></button>
     </div>
   </div>
