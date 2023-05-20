@@ -1,5 +1,12 @@
 <div *ngIf="isVisible" class="main">
   <button
+    tuiIconButton
+    size="s"
+    appearance="outline"
+    icon="tuiIconUsers"
+    (click)="goContacts()"
+  ></button>
+  <button
     tuiButton
     size="s"
     appearance="outline"

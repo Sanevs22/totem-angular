@@ -133,4 +133,8 @@ export class SaveBarComponent {
         this.ngOnInit();
       });
   }
+
+  goContacts() {
+    this.router.navigate(['contacts']);
+  }
 }
