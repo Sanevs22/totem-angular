@@ -80,6 +80,7 @@ export class AuthService {
         details: 'А тут можно подробнее',
         avatar: 'assets/img/avatar.png',
         totem: 'assets/totem/totem1.png',
+        contacts: [],
       });
       return {
         code: 21,

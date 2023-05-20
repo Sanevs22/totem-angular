@@ -7,11 +7,13 @@ import { ErrComponent } from './components/pages/err/err.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ShareComponent } from './components/share/share.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'start', component: StartPageComponent },
   { path: 'share', component: ShareComponent },
+  { path: 'contacts', component: ContactsComponent },
   { path: 'sign', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },

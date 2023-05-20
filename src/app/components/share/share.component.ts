@@ -41,4 +41,10 @@ export class ShareComponent {
       }
     });
   }
+
+  ngOnDestroy(): void {
+    if (this.subUserLogStatus$) {
+      this.subUserLogStatus$.unsubscribe();
+    }
+  }
 }

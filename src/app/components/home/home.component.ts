@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     totem: '',
     details: '',
     widgets: [],
+    contacts: [],
   };
   loader = true;
   widgetType!: string;

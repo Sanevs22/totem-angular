@@ -50,6 +50,8 @@ import { WidgetEditorComponent } from './components/home/widget-editor/widget-ed
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { ShareComponent } from './components/share/share.component';
 import { QrCodeModule } from 'ng-qrcode';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { SaveBarComponent } from './components/contacts/save-bar/save-bar.component';
 
 export function playerFactory() {
   return player;
@@ -71,6 +73,8 @@ export function playerFactory() {
     WidgetEditorComponent,
     AppBarComponent,
     ShareComponent,
+    ContactsComponent,
+    SaveBarComponent,
   ],
   imports: [
     BrowserModule,

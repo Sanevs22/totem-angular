@@ -1,18 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bar',
   templateUrl: './app-bar.component.html',
   styleUrls: ['./app-bar.component.less'],
 })
-export class AppBarComponent implements OnInit {
+export class AppBarComponent {
   @Input()
   route!: string;
   constructor(private router: Router) {}
-  ngOnInit(): void {
-    console.log(this.router);
-  }
 
   goHome() {
     this.router.navigate(['']);
@@ -22,5 +19,7 @@ export class AppBarComponent implements OnInit {
     this.router.navigate(['share']);
   }
 
-  goContacts() {}
+  goContacts() {
+    this.router.navigate(['contacts']);
+  }
 }

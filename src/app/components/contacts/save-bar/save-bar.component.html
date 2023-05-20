@@ -1,0 +1,60 @@
+<div *ngIf="isVisible" class="main">
+  <button
+    tuiButton
+    size="s"
+    appearance="outline"
+    [icon]="isSave ? 'tuiIconCheckCircle' : 'tuiIconCircle'"
+    (click)="
+      !isSave
+        ? showDialogSaveContact(addContact)
+        : showDialogSaveContact(deleteContact)
+    "
+  >
+    {{ isSave ? "Сохранен" : "Сохранить" }}
+  </button>
+</div>
+
+<ng-template #addContact let-observer>
+  <form [formGroup]="form">
+    <p>
+      <tui-input formControlName="comment">
+        Добавить комментарий
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.form.controls.comment.invalid &&
+          this.form.controls.comment.touched
+        "
+        error="Не больше 150 символов"
+      ></tui-error>
+    </p>
+  </form>
+  <p>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="observer.complete(); addContacts()"
+    >
+      Сохранить
+    </button>
+  </p>
+</ng-template>
+
+<ng-template #deleteContact let-observer>
+  <p>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="observer.complete(); deleteContacts()"
+    >
+      Удалить из контактов
+    </button>
+  </p>
+</ng-template>

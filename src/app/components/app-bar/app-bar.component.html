@@ -29,6 +29,7 @@
         icon="tuiIconUsersLarge"
         class="tui-group__auto-width-item"
         [ngClass]="{ active_page: route === 'contacts' }"
+        (click)="goContacts()"
       ></button>
     </div>
   </div>

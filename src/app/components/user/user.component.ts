@@ -17,6 +17,7 @@ export class UserComponent implements OnInit {
     totem: '',
     details: '',
     widgets: [],
+    contacts: [],
   };
   loader = true;
   constructor(

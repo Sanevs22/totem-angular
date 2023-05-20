@@ -1,3 +1,4 @@
+import { Contact } from './contact';
 import { Widget } from './widget';
 
 export interface User {
@@ -8,4 +9,5 @@ export interface User {
   totem: string;
   details: string;
   widgets: Widget[];
+  contacts: Contact[];
 }

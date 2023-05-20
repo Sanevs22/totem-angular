@@ -10,6 +10,7 @@ import {
 } from 'firebase/firestore';
 import { User } from '../interfaces/user';
 import { Widget } from '../interfaces/widget';
+import { Contact } from '../interfaces/contact';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +50,7 @@ export class UserAPIService {
       totem: userData['totem'],
       details: userData['details'],
       widgets: userData['widgets'],
+      contacts: userData['contacts'],
     };
     console.log(this.user);
     return this.user;
@@ -75,6 +77,7 @@ export class UserAPIService {
       totem: totem,
     });
   }
+
   async updateWidgetsData(nickname: string, widgets: Widget[]) {
     const queryEmail = query(
       collection(this.db, 'user'),
@@ -87,6 +90,20 @@ export class UserAPIService {
       widgets: widgets,
     });
   }
+
+  async updateContactsData(nickname: string, contacts: Contact[]) {
+    const queryEmail = query(
+      collection(this.db, 'user'),
+      where('nickname', '==', nickname)
+    );
+    const emailSnapshot = await getDocs(queryEmail);
+    let id = emailSnapshot.docs[0].id;
+    const userRef = doc(this.db, 'user', id);
+    await updateDoc(userRef, {
+      contacts: contacts,
+    });
+  }
+
   async updateAvatarData(nickname: string, url: string) {
     const queryEmail = query(
       collection(this.db, 'user'),
