@@ -1,0 +1,32 @@
+<div class="main">
+  <div class="share" *ngIf="!loader">
+    <div class="tui-text_h6">Поделиться</div>
+    <form [formGroup]="form">
+      <p>
+        <tui-input-copy
+          [readOnly]="true"
+          tuiHintAppearance="onDark"
+          successMessage="Cкопировано"
+          formControlName="link"
+          tuiTextfieldSize="m"
+          [disabled]="true"
+        >
+          link
+          <input [disabled]="true" tuiTextfield placeholder="nickname" />
+        </tui-input-copy>
+      </p>
+    </form>
+    <div class="code">
+      <qr-code
+        [value]="link"
+        size="300"
+        lightColor="#2b2d2e"
+        darkColor="#ffffff"
+        errorCorrectionLevel="M"
+      >
+      </qr-code>
+    </div>
+    <div class="nickname">@{{ nickname }}</div>
+  </div>
+  <app-bar route="share"></app-bar>
+</div>

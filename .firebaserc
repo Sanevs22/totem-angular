@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tango-1232100": {
+      "hosting": {
+        "coursework-Sanevs22": [
+          "tango-1232100"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tango-1232100"
+  }
+}

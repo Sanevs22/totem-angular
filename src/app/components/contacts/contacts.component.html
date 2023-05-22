@@ -1,0 +1,70 @@
+<div class="main">
+  <div
+    class="contact_contaner"
+    *ngFor="let contact of contacts; let index = index"
+  >
+    <a [href]="'user/' + contact.nickname">
+      <div class="contact">
+        <div class="avatar">
+          <img [src]="contact.avatar" alt="avatar" />
+        </div>
+        <div class="name">{{ contact.name }}</div>
+        <div class="about">{{ contact.about }}</div>
+      </div>
+    </a>
+    <button
+      class="editor"
+      icon="tuiIconEdit2"
+      tuiIconButton
+      size="s"
+      appearance="outline"
+      (click)="showDialogEditContact(editContact, index)"
+    ></button>
+    <div class="comment">{{ contact.comment }}</div>
+  </div>
+
+  <app-bar route="contacts"></app-bar>
+</div>
+
+<ng-template #editContact let-observer>
+  <form [formGroup]="form">
+    <p>
+      <tui-input formControlName="comment">
+        Добавить комментарий
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.form.controls.comment.invalid &&
+          this.form.controls.comment.touched
+        "
+        error="Не больше 150 символов"
+      ></tui-error>
+    </p>
+  </form>
+  <p>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="observer.complete(); updateComment()"
+    >
+      Сохранить изменения
+    </button>
+  </p>
+  <p>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="button"
+      appearance="accent"
+      size="m"
+      class="tui-space_right-3"
+      (click)="observer.complete(); deleteContact()"
+    >
+      Удалить контакт
+    </button>
+  </p>
+</ng-template>

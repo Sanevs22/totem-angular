@@ -1,0 +1,187 @@
+@import "@taiga-ui/core/styles/taiga-ui-local.less";
+
+.main {
+  box-sizing: border-box;
+  width: 340px;
+  height: 100%;
+  margin: 0px auto;
+  background: #19191d;
+  padding: 20px 0 120px 0;
+}
+
+.user_header {
+  position: relative;
+  width: 340px;
+  height: 162px;
+  box-sizing: border-box;
+}
+
+.cover {
+  width: 340px;
+  height: 90px;
+  z-index: 1;
+  background: linear-gradient(
+    259.1deg,
+    #28c05c -23.39%,
+    rgba(135, 49, 70, 0.47) 97.16%
+  );
+  border-radius: 20px;
+  position: absolute;
+  top: 30px;
+}
+
+.totem {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  position: absolute;
+  left: 110px;
+  z-index: 2;
+  & img {
+    max-width: 120px;
+    max-height: 120px;
+  }
+}
+
+.shadow {
+  width: 340px;
+  height: 48px;
+  background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 0 0 19px 19px;
+  position: absolute;
+  top: 72px;
+  z-index: 3;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  left: 16px;
+  top: 84px;
+  border-radius: 20px;
+  background: #fdfdfd;
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+  cursor: pointer;
+
+  & img {
+    max-width: 70px;
+  }
+  &:hover {
+    .avatar_change {
+      opacity: 0.7;
+    }
+  }
+}
+
+.avatar_change {
+  background: #19191d;
+  position: absolute;
+  bottom: 0;
+  width: 70px;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.name {
+  width: 218px;
+  height: 40px;
+  padding-top: 6px;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 400px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+  top: 100px;
+  left: 116px;
+}
+
+.about {
+  width: 218px;
+  height: 18px;
+  color: #959595;
+  font-size: 12px;
+  font-weight: 400;
+  overflow: hidden;
+  position: absolute;
+  top: 140px;
+  left: 116px;
+}
+
+.details {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  overflow: hidden;
+}
+
+.tools {
+  display: flex;
+  justify-content: center;
+}
+
+.widgets_tools {
+  position: fixed;
+  bottom: 80px;
+  width: 340px;
+  margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+  & button {
+    background: #19191d;
+  }
+}
+
+.carousel {
+  height: 100px;
+  & img {
+    max-height: 100px;
+    max-width: 100px;
+    margin: 0 auto;
+  }
+}
+
+.field-small {
+  min-height: 3.5rem;
+}
+
+.widgets {
+  margin: 10px 0;
+}
+
+.tiles {
+  gap: 1rem;
+  grid-auto-rows: minmax(var(--tui-height-m), auto);
+  margin: 20px 0;
+}
+
+.content {
+  .transition(box-shadow);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background: var(--tui-base-01);
+  border-radius: var(--tui-radius-l);
+  border: 1px solid var(--tui-base-03);
+  cursor: ns-resize;
+
+  tui-tile._dragged & {
+    .shadow(5);
+  }
+}
+
+.widgets_editor {
+  padding-bottom: 20px;
+}
+
+.widget_item_editor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}

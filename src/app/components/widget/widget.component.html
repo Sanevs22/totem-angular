@@ -1,0 +1,4 @@
+<div class="widget">
+  <app-header *ngIf="widget.type === 'header'" [widget]="widget"></app-header>
+  <app-link *ngIf="widget.type === 'link'" [widget]="widget"></app-link>
+</div>

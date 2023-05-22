@@ -1,0 +1,36 @@
+<div class="position">
+  <div class="group">
+    <div tuiGroup [collapsed]="true">
+      <button
+        tuiIconButton
+        type="button"
+        appearance="outline"
+        size="l"
+        icon="tuiIconHomeLarge"
+        class="tui-group__auto-width-item"
+        [ngClass]="{ active_page: route === 'home' }"
+        (click)="goHome()"
+      ></button>
+      <button
+        tuiIconButton
+        type="button"
+        appearance="outline"
+        size="l"
+        icon="tuiIconShare2Large"
+        class="tui-group__auto-width-item"
+        [ngClass]="{ active_page: route === 'share' }"
+        (click)="goShare()"
+      ></button>
+      <button
+        tuiIconButton
+        type="button"
+        appearance="outline"
+        size="l"
+        icon="tuiIconUsersLarge"
+        class="tui-group__auto-width-item"
+        [ngClass]="{ active_page: route === 'contacts' }"
+        (click)="goContacts()"
+      ></button>
+    </div>
+  </div>
+</div>

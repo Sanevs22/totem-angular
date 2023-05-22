@@ -1,0 +1,214 @@
+<div class="main">
+  <div *ngIf="!loader">
+    <div class="user_status">
+      <tui-hosted-dropdown tuiDropdownAlign="left" [content]="userStatusButton">
+        <button
+          tuiButton
+          size="s"
+          appearance="outline"
+          icon="tuiIconToggleRight"
+        >
+          {{ user.nickname }}
+        </button>
+      </tui-hosted-dropdown>
+    </div>
+    <div class="user_header">
+      <div class="totem">
+        <img [src]="user.totem" alt="totem" />
+      </div>
+      <div class="shadow"></div>
+      <div class="cover"></div>
+      <div class="avatar" (click)="showDialogChangeAvatar(changeAvatar)">
+        <div class="avatar_change">ред.</div>
+        <img [src]="user.avatar" alt="avatar" />
+      </div>
+      <div class="name">{{ user.name }}</div>
+      <div class="about">{{ user.about }}</div>
+    </div>
+    <p class="details">
+      {{ user.details }}
+    </p>
+    <div class="tools">
+      <button
+        (click)="showDialogUserProfile(userProfile)"
+        class="open_editor"
+        tuiButton
+        size="s"
+        appearance="outline"
+      >
+        Редактировать профиль
+      </button>
+    </div>
+    <div class="widgets" *ngIf="!widgetEditorActive">
+      <app-widget
+        *ngFor="let widget of user.widgets"
+        [widget]="widget"
+      ></app-widget>
+    </div>
+    <div class="widgets_editor" *ngIf="widgetEditorActive">
+      <tui-tiles #tiles class="tiles" [debounce]="500" [(order)]="order">
+        <tui-tile
+          *ngFor="let item of user.widgets; let index = index"
+          tuiTileHandle
+          class="tile"
+          [style.order]="order.get(index)"
+        >
+          <div class="content" (mouseup)="(dragAndDrop)">
+            <div class="widget_item_editor">
+              <div>
+                {{ item.header }}
+              </div>
+              <div>
+                <button
+                  icon="tuiIconXLarge"
+                  tuiIconButton
+                  size="s"
+                  appearance="outline"
+                  (click)="deleteWidget(index)"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </tui-tile>
+      </tui-tiles>
+      <div class="tools">
+        <button
+          class="open_editor"
+          tuiButton
+          size="s"
+          appearance="outline"
+          (click)="closeWidgetEditor()"
+        >
+          Закрыть редактор
+        </button>
+      </div>
+    </div>
+    <div class="widgets_tools">
+      <tui-hosted-dropdown
+        tuiDropdownAlign="center"
+        [content]="addWidgetButton"
+      >
+        <button
+          icon="tuiIconPlus"
+          tuiIconButton
+          size="m"
+          appearance="outline"
+        ></button>
+      </tui-hosted-dropdown>
+    </div>
+  </div>
+  <app-bar route="home"></app-bar>
+</div>
+
+<ng-template #userStatusButton>
+  <tui-data-list size="s">
+    <button tuiOption type="button" size="xs" (click)="logOut()">Выйти</button>
+  </tui-data-list>
+</ng-template>
+
+<ng-template #addWidgetButton>
+  <tui-data-list>
+    <button
+      tuiOption
+      type="button"
+      (click)="showDialogAddWidget(AddWidget, 'header')"
+    >
+      Заголовок
+    </button>
+    <button
+      tuiOption
+      type="button"
+      (click)="showDialogAddWidget(AddWidget, 'link')"
+    >
+      Ссылка
+    </button>
+    <button tuiOption type="button" (click)="openWidgetEditor()">
+      Изменить
+    </button>
+  </tui-data-list>
+</ng-template>
+
+<ng-template #changeAvatar let-observer>
+  <app-avatar-editor
+    (avatarLoaded)="observer.complete(); ngOnInit()"
+  ></app-avatar-editor>
+</ng-template>
+
+<ng-template #userProfile let-observer>
+  <p>Изменить тотем</p>
+  <tui-carousel
+    class="carousel"
+    [draggable]="true"
+    [itemsCount]="1"
+    [(index)]="index"
+  >
+    <ng-container *ngFor="let totem of totems">
+      <img *tuiItem alt="totem" draggable="false" [src]="totem" class="item" />
+    </ng-container>
+  </tui-carousel>
+  <br />
+  <tui-pagination
+    size="s"
+    class="pagination"
+    [length]="totems.length"
+    [(index)]="index"
+  ></tui-pagination>
+  <form [formGroup]="form">
+    <p>
+      <tui-input formControlName="name">
+        Имя
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.form.controls.name.invalid && this.form.controls.name.touched
+        "
+        error="Не больше 10 символов"
+      ></tui-error>
+    </p>
+    <p>
+      <tui-input formControlName="about">
+        Короткое описание
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error
+        *ngIf="
+          this.form.controls.about.invalid && this.form.controls.about.touched
+        "
+        error="Не больше 32 символов"
+      ></tui-error>
+    </p>
+    <tui-text-area
+      formControlName="details"
+      class="field-small"
+      [expandable]="true"
+    >
+      Подробнее расскажи о себе
+    </tui-text-area>
+    <tui-error
+      *ngIf="
+        this.form.controls.details.invalid && this.form.controls.about.touched
+      "
+      error="Не больше 120 символов"
+    ></tui-error>
+  </form>
+  <p>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="button"
+      size="m"
+      class="tui-space_right-3"
+      (click)="observer.complete(); updateUserData()"
+    >
+      Сохранить
+    </button>
+  </p>
+</ng-template>
+
+<ng-template #AddWidget let-observer>
+  <app-widget-editor
+    [widgetType]="widgetType"
+    (widgetLoaded)="observer.complete()"
+  ></app-widget-editor>
+</ng-template>

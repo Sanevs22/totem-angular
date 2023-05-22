@@ -1,0 +1,83 @@
+.main {
+  box-sizing: border-box;
+  width: 340px;
+  height: 100%;
+  margin: 0px auto;
+  background: #19191d;
+  padding: 20px 0 120px 0;
+}
+
+.contact_contaner {
+  position: relative;
+}
+
+.contact {
+  width: 340px;
+  height: 104px;
+  position: relative;
+  background: #2b2d2e;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  left: 10px;
+  top: 10px;
+  border-radius: 20px;
+  background: #fdfdfd;
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+  & img {
+    max-width: 70px;
+  }
+}
+
+.name {
+  width: 218px;
+  height: 40px;
+  padding-top: 6px;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 400px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+  top: 22px;
+  left: 100px;
+}
+
+.about {
+  width: 218px;
+  height: 18px;
+  color: #959595;
+  font-size: 12px;
+  font-weight: 400;
+  overflow: hidden;
+  position: absolute;
+  top: 52px;
+  left: 100px;
+}
+
+.editor {
+  position: absolute;
+  top: 24px;
+  left: 280px;
+  z-index: 5;
+}
+
+.comment {
+  box-sizing: border-box;
+  width: 320px;
+  min-height: 30px;
+  background: #4d4f4f;
+  color: #ffffff;
+  border-radius: 20px;
+  position: relative;
+  top: -18px;
+  left: 10px;
+  padding: 10px;
+  z-index: 5;
+}
