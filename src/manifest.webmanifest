@@ -3,7 +3,7 @@
   "short_name": "Totem",
   "theme_color": "#19191d",
   "background_color": "#19191d",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "./",
   "start_url": "./",
   "icons": [
