@@ -44,7 +44,6 @@ export class ContactsComponent {
           this.userAPIService.getUser(nickname).then((user) => {
             if (user) {
               this.contacts = user.contacts;
-              console.log(this.contacts);
             }
           });
         });
