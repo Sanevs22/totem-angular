@@ -12,7 +12,7 @@ import { UserAPIService } from 'src/app/services/user-api.service';
   styleUrls: ['./share.component.less'],
 })
 export class ShareComponent {
-  host = 'https://www.google.com/';
+  host = 'https://totem-two.vercel.app/';
   link = this.host;
   nickname!: string;
   loader = true;

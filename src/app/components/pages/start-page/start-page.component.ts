@@ -11,7 +11,7 @@ export class StartPageComponent {
   constructor(private router: Router) {}
 
   options: AnimationOptions = {
-    path: 'https://assets9.lottiefiles.com/packages/lf20_ik4jyixs.json',
+    path: 'assets/lottie/pages/start-page.json',
     loop: true,
     autoplay: true,
   };
