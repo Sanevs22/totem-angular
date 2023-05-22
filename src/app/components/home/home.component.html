@@ -97,7 +97,7 @@
       </tui-hosted-dropdown>
     </div>
   </div>
-  <app-bar route="home"></app-bar>
+  <app-bar *ngIf="appBar" route="home"></app-bar>
 </div>
 
 <ng-template #userStatusButton>

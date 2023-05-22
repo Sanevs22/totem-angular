@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
   loader = true;
   widgetType!: string;
+  appBar = false;
 
   subUserLogStatus$!: Subscription;
   subEditor$!: Subscription;
@@ -69,6 +70,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (!user) {
         this.router.navigate(['start']);
       } else {
+        this.appBar = true
         this.userAPIService.getNickname(user?.uid!).then((nickname) => {
           this.userAPIService.getUser(nickname).then((user) => {
             if (user) {
