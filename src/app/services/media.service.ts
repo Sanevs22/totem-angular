@@ -27,6 +27,9 @@ export class MediaService {
     'assets/icon/icon3.png',
     'assets/icon/icon4.png',
     'assets/icon/icon5.png',
+    'assets/icon/icon6.png',
+    'assets/icon/icon7.png',
+
   ];
 
   async uploadAvatar(nickname: string, image: File) {

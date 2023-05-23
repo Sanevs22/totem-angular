@@ -17,7 +17,7 @@
         : showDialogSaveContact(deleteContact)
     "
   >
-    {{ isSave ? "Сохранен" : "Сохранить" }}
+    {{ isSave ? "В контактах" : "Добавить в контакты" }}
   </button>
 </div>
 
@@ -52,6 +52,7 @@
 </ng-template>
 
 <ng-template #deleteContact let-observer>
+  <p>Вы действительно хотите удалить пользователя из списка контактов?</p>
   <p>
     <button
       tuiButton
