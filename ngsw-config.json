@@ -30,8 +30,8 @@
   "dataGroups": [
     {
       "name": "api",
-      "urls": ["https://firestore.googleapis.com/**",
-      "https://totem-two.vercel.app/**"],
+      "urls": ["https://firestore.googleapis.com",
+      "https://totem-two.vercel.app/"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxAge": "1d",
